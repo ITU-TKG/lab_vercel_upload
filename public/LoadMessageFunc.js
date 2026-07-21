@@ -42,8 +42,6 @@ function loadMessagesFromServer(url, group) {
 			// グループに応じて通知タイプを設定
 			var notificationType = "success";
 			
-			// クアルトリクスの埋め込み変数に記録する関数を追加呼び出し
-			recordMessageLog(randomMessage, group, 'success');
 			// 遅延してから通知を表示
 			setTimeout(function() {
 				showNotification(randomMessage, notificationType);
@@ -188,9 +186,9 @@ function recordMessageLog(message, group, status, errorMessage) {
 		var logsJson = JSON.stringify(logsArray);
 		
 		// 文字数制限チェック（クアルトリクスの埋め込み変数は文字数に制限がある場合がある）
-		// 上限を超える場合は、最新10件のみ保持
+		// 上限を超える場合は、最新100件のみ保持
 		if (logsJson.length > 10000) {
-			logsArray = logsArray.slice(-10); // 最新10件のみ保持
+			logsArray = logsArray.slice(-100); // 最新10件のみ保持
 			logsJson = JSON.stringify(logsArray);
 		}
 		
