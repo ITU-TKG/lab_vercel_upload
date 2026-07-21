@@ -32,7 +32,6 @@ function loadMessagesFromServer(url, group) {
 			
 			// ランダムにメッセージを選択
 			var randomMessage = getRandomMessage(messages, group);
-			console.log('[DEBUG] 選択されたメッセージ=' + randomMessage);
 			
 			if (!isReload) {
 				recordMessageLog(randomMessage, group, 'success', null);
