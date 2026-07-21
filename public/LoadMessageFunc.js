@@ -1,6 +1,7 @@
 
 // サーバーからJSONを取得してランダムに通知を表示する関数
 function loadMessagesFromServer(url, group) {
+
 	fetch(url)
 		.then(function(response) {
 			if (!response.ok) {
@@ -34,9 +35,9 @@ function loadMessagesFromServer(url, group) {
 			console.log('[DEBUG] 選択されたメッセージ=' + randomMessage);
 			
 			if (!isReload) {
-				recordMessageLog(randomMessage, group, 'success', null, trialNum, itemNum);
+				recordMessageLog(randomMessage, group, 'success', null);
 			} else {
-				console.log('[DEBUG] リロードのため記録スキップ trial=' + trialNum + ' item=' + itemNum);
+				console.log('[DEBUG] リロードのため記録スキップ');
 			}
 
 			// グループに応じて通知タイプを設定
