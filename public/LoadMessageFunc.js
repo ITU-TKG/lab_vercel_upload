@@ -12,6 +12,8 @@ function loadMessagesFromServer(url, group) {
 		
 			// 指定されたグループのメッセージを取得
 			var messages = data[group] || [];
+			// デバック(要素数)
+			console.log('[DEBUG] メッセージ取得件数(' + group + ')=' + messages.length);
 			
 			// メッセージが空でないか確認
 			if (!Array.isArray(messages) || messages.length === 0) {
@@ -21,16 +23,27 @@ function loadMessagesFromServer(url, group) {
 				
 				return;
 			}
+
+			// 再読み込み判定	
+			var currentKey = group + 'Current';
+			var isReload = localStorage.getItem(currentKey) !== null;
+			console.log('[DEBUG] isReload=' + isReload);
 			
 			// ランダムにメッセージを選択
 			var randomMessage = getRandomMessage(messages, group);
+			console.log('[DEBUG] 選択されたメッセージ=' + randomMessage);
 			
+			if (!isReload) {
+				recordMessageLog(randomMessage, group, 'success', null, trialNum, itemNum);
+			} else {
+				console.log('[DEBUG] リロードのため記録スキップ trial=' + trialNum + ' item=' + itemNum);
+			}
+
 			// グループに応じて通知タイプを設定
 			var notificationType = "success";
 			
 			// クアルトリクスの埋め込み変数に記録する関数を追加呼び出し
 			recordMessageLog(randomMessage, group, 'success');
-			
 			// 遅延してから通知を表示
 			setTimeout(function() {
 				showNotification(randomMessage, notificationType);
