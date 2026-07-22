@@ -188,7 +188,7 @@ function recordMessageLog(message, group, status, errorMessage) {
 		// 文字数制限チェック（クアルトリクスの埋め込み変数は文字数に制限がある場合がある）
 		// 上限を超える場合は、最新100件のみ保持
 		if (logsJson.length > 10000) {
-			logsArray = logsArray.slice(-100); // 最新10件のみ保持
+			logsArray = logsArray.slice(-100); // 最新100件のみ保持
 			logsJson = JSON.stringify(logsArray);
 		}
 		
